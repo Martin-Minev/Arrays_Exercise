@@ -15,10 +15,9 @@ namespace LadyBugs
             string[] bugs = new string[fieldSize];
             for (int i = 0; i < initialIndices.Length; i++)
             {
-                 bugs[initialIndices[i]] = "bug"; 
+                bugs[initialIndices[i]] = "bug";
             }
-            //Console.WriteLine(string.Join(", ", bugs));
-
+  
             string input = string.Empty;
 
             while ((input = Console.ReadLine()) != "end")
@@ -29,6 +28,10 @@ namespace LadyBugs
                 int flyLength = int.Parse(comArgs[2]);
                 int endIndex = 0;
 
+                if (initialIndex < 0 || initialIndex >= bugs.Length)
+                {
+                    continue;
+                }
                 if (direction == "right")
                 {
                     endIndex = initialIndex + flyLength;
@@ -37,12 +40,54 @@ namespace LadyBugs
                 {
                     endIndex = initialIndex - flyLength;
                 }
+                if (endIndex < 0 || endIndex >= bugs.Length)
+                {
+                    bugs[initialIndex] = "";
+                    continue;
+                }
 
-                bugs[] = 
-
-
-
+                if (bugs[endIndex] == "bug")
+                {
+                    for (int i = 2 ; i < 999999; i++)
+                    {
+                        if (i * endIndex < 0 || i * endIndex >= bugs.Length)
+                        {
+                            bugs[initialIndex] = "";
+                            continue;
+                        }
+                        else
+                        {
+                            bugs[i * endIndex] = "bug";
+                            bugs[initialIndex] = "";
+                        }
+                    }   
+                }
+                else
+                {
+                    if (endIndex < 0 || endIndex >= bugs.Length)
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        bugs[endIndex] = "bug";
+                        bugs[initialIndex] = "";
+                    }
+                }
             }
+            int[] result = new int[bugs.Length];
+            for (int i = 0; i < result.Length; i++)
+            {
+                if (bugs[i] == "bug")
+                {
+                    result[i] = 1;
+                }
+                else
+                {
+                    result[i] = 0;
+                }
+            }
+            Console.WriteLine(string.Join(" ", result));
         }
     }
 }
