@@ -17,7 +17,6 @@ namespace LadyBugs
             {
                 bugs[initialIndices[i]] = "bug";
             }
-  
             string input = string.Empty;
 
             while ((input = Console.ReadLine()) != "end")
